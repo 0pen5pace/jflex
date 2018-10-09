@@ -2,10 +2,12 @@
 
 %%
 
+%class scanner
 %line
 %char
 %state COMMENT
 %unicode
+%standalone
 
 %debug
 
@@ -13,32 +15,16 @@
 
 private int comment_count = 0;
 
-
-class Utiliy {
-
-  private static final String errorMsg[] = {
-    "Error: Unmatched end-of-comment punctuation.",
-    "Error: Unmatched start-of-comment punctuation.",
-    "Error: Unclosed string.",
-    "Error: Illegal character."
-  };
-
-  public static final int E_ENDCOMMENT = 0;
-  public static final int E_STARTCOMMENT = 1;
-  public static final int E_UNCLOSEDSTR = 2;
-  public static final int E_UNMATCHED = 3;
-
-  public static void error(int code) {
-    System.err.println(errorMsg[code]);
-  }
+public static String printToken(int index, String text) {
+    return "Text: " + text + "\n"
+          +"ID: " + index+ "\n\n";
 }
-
 %}
 
 ALPHA=[A-Za-z]
 DIGIT=[0-9]
 NONNEWLINE_WHITE_SPACE_CHAR=[\ \t\b\012]
-NEWLINE=\r|\n|\r\n
+NEWLINE=\r|\n|\r\n|\u000A
 WHITE_SPACE_CHAR=[\n\r\ \t\b\012]
 STRING_TEXT=(\\\"|[^\n\r\"]|\\{WHITE_SPACE_CHAR}+\\)*
 COMMENT_TEXT=([^*/\n]|[^*\n]"/"[^*\n]|[^/\n]"*"[^/\n]|"*"[^/\n]|"/"[^*\n])+
@@ -47,28 +33,28 @@ Ident = {ALPHA}({ALPHA}|{DIGIT}|_)*
 %%
 
 <YYINITIAL> {
-    "," { return 0; }
-    ":" { return 1; }
-    ";" { return 2; }
-    "(" { return 3; }
-    ")" { return 4; }
-    "[" { return 5; }
-    "]" { return 6; }
-    "{" { return 7; }
-    "}" { return 8; }
-    "." { return 9; }
-    "+" { return 10; }
-    "-" { return 11; }
-    "*" { return 12; }
-    "/" { return 13; }
-    "=" { return 14; }
-    "<>" { return 15; }
-    "<"  { return 16; }
-    "<=" { return 17; }
-    ">"  { return 18; }
-    ">=" { return 19; }
-    "&"  { return 20; }
-    "|"  { return 21; }
+    "," { return printToken(0,yytext()); }
+    ":" { return printToken(1,yytext()); }
+    ";" { return printToken(2,yytext()); }
+    "(" { return printToken(3,yytext()); }
+    ")" { return printToken(4,yytext()); }
+    "[" { return printToken(5,yytext()); }
+    "]" { return printToken(6,yytext()); }
+    "{" { return printToken(7,yytext()); }
+    "}" { return printToken(8,yytext()); }
+    "." { return printToken(9,yytext()); }
+    "+" { return printToken(10,yytext()); }
+    "-" { return printToken(11,yytext()); }
+    "*" { return printToken(12,yytext()); }
+    "/" { return printToken(13,yytext()); }
+    "=" { return printToken(14,yytext()); }
+    "<>" { return printToken(15,yytext()); }
+    "<"  { return printToken(16,yytext()); }
+    "<=" { return printToken(17,yytext()); }
+    ">"  { return printToken(18,yytext()); }
+    ">=" { return printToken(19,yytext()); }
+    "&"  { return printToken(20,yytext()); }
+    "|"  { return printToken(21,yytext()); }
 
 
     {NONNEWLINE_WHITE_SPACE_CHAR}+ { }
@@ -76,29 +62,32 @@ Ident = {ALPHA}({ALPHA}|{DIGIT}|_)*
 
     \"{STRING_TEXT}\" {
         String str =  yytext().substring(1,yylength()-1);
-        return 40;
+        return printToken(40,yytext());
     }
     \"{STRING_TEXT} {
         String str =  yytext().substring(1,yytext().length());
-        Utility.error(Utility.E_UNCLOSEDSTR);
-        return 41;
+        System.err.println("Error: Unclosed string.");
+        return printToken(41,yytext());
     }
 
-    {DIGIT}+ { return 42; }
+    {DIGIT}+ { return printToken(42,yytext()); }
 
-    {Ident} { return 43; }
+    {Ident} { return printToken(43,yytext()); }
 }
 
+// Count the opening comment symbols /* . If all opening comment symbols have been terminated with a closing comment symbole start the magic again.
 <COMMENT> {
   "/*" { comment_count++; }
   "*/" { if (--comment_count == 0) yybegin(YYINITIAL); }
+      // Do nothing with the text between the comment
   {COMMENT_TEXT} { }
 }
 
-
+// Don't do anything with comments. Just ignore, hence the empty brackets
 {NEWLINE} { }
 
+// Throw an error for any other characters that do not match any previous roules.
 . {
-  System.out.println("Illegal character: <" + yytext() + ">");
-	Utility.error(Utility.E_UNMATCHED);
+    System.out.println("Illegal character: <" + yytext() + ">");
+	System.err.println("Error: Illegal character.");
 }
