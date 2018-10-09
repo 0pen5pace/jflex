@@ -1,0 +1,53 @@
+
+Terminale
+A0 = {ε}
+A1 = {a,..,z|A,..,Z}
+A2 = {0,1,2,3,4,5,6,7,8,9}
+A3 = {(,),{,},[,],+,-,*,/,^}
+A4 = {function,if,else,for,var,loop}
+A5 = {=,|,&}
+A6 = {#,;}
+
+
+Nicht Terminale:
+STMT
+VAR
+EXP
+FUNC
+
+
+
+Start symbol --> STMT
+VAR --> "a|b|..|z|A|..|Z"
+VAR --> VAR "0|..|9"
+VAR --> VAR VAR
+EXP --> VAR
+EXP --> "var" VAR "=" EXP ";"
+EXP --> EXP "==" EXP
+EXP --> EXP "!=" EXP
+EXP --> EXP ">" EXP
+EXP --> EXP "<" EXP
+EXP --> "(" EXP ")"
+EXP --> EXP ";"
+EXP --> EXP EXP
+
+FUNC --> "function " VAR "(" VAR ")" STMT
+EXP --> FUNC
+EXP --> VAR "()"
+STMT --> FUNC
+STMT --> EXP
+STMT --> "{" STMT "}"
+STMT --> "if (" EXP ")" STMT
+STMT --> "if (" EXP ")" STMT "else" STMT
+STMT --> "loop (" STMT "|" EXP "|" EXP ")" STMT
+STMT --> "return " EXP
+
+
+
+
+var xyz = "test"
+function tester() { if(3 == 3) {}}
+
+
+Some help: https://classes.engineering.wustl.edu/cse425s/resources/bnf/
+JavaScript in BNF https://tomcopeland.blogs.com/EcmaScript.html

@@ -3,11 +3,12 @@ Erstellen Sie einen Entwerfen einer eigene Programmiersprache; im Verlauf des Se
 - Spezifizieren Sie Ihre Sprache durch eine kontextfreie Grammatik.
 - Spezifizieren Sie ferner die Wörter (Tokens) der Sprache durch reguläre Grammatiken oder durch reguläre Ausdrücke.
 - Die Sprache sollte mindestens folgende Elemente enthalten:
--- Arithmetische Ausdrücke,
--- Variable,
--- Bedingte Anweisungen.
--- Schleifen,
--- Aufruf von Funktionen,
--- Definition von eigenen Funktionen.
-Die Spezifikation soll als pdf abgegeben werden
-Umfang 2-4 Seiten
+    - Arithmetische Ausdrücke,
+    - Variable,
+    - Bedingte Anweisungen.
+    - Schleifen,
+    - Aufruf von Funktionen,
+    - Definition von eigenen Funktionen.
+
+- Die Spezifikation soll als pdf abgegeben werden
+- Umfang 2-4 Seiten
