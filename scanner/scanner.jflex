@@ -28,36 +28,36 @@ Ident = {ALPHA}({ALPHA}|{DIGIT}|_)*
 %% 
 
 <YYINITIAL> {
-  "," { return (new Yytoken(0,yytext(),yyline,yychar,yychar+1)); }
-  ":" { return (new Yytoken(1,yytext(),yyline,yychar,yychar+1)); }
-  ";" { return (new Yytoken(2,yytext(),yyline,yychar,yychar+1)); }
-  "(" { return (new Yytoken(3,yytext(),yyline,yychar,yychar+1)); }
-  ")" { return (new Yytoken(4,yytext(),yyline,yychar,yychar+1)); }
-  "[" { return (new Yytoken(5,yytext(),yyline,yychar,yychar+1)); }
-  "]" { return (new Yytoken(6,yytext(),yyline,yychar,yychar+1)); }
-  "{" { return (new Yytoken(7,yytext(),yyline,yychar,yychar+1)); }
-  "}" { return (new Yytoken(8,yytext(),yyline,yychar,yychar+1)); }
-  "." { return (new Yytoken(9,yytext(),yyline,yychar,yychar+1)); }
-  "+" { return (new Yytoken(10,yytext(),yyline,yychar,yychar+1)); }
-  "-" { return (new Yytoken(11,yytext(),yyline,yychar,yychar+1)); }
-  "*" { return (new Yytoken(12,yytext(),yyline,yychar,yychar+1)); }
-  "/" { return (new Yytoken(13,yytext(),yyline,yychar,yychar+1)); }
-  "=" { return (new Yytoken(14,yytext(),yyline,yychar,yychar+1)); }
-  "<>" { return (new Yytoken(15,yytext(),yyline,yychar,yychar+2)); }
-  "<"  { return (new Yytoken(16,yytext(),yyline,yychar,yychar+1)); }
-  "<=" { return (new Yytoken(17,yytext(),yyline,yychar,yychar+2)); }
-  ">"  { return (new Yytoken(18,yytext(),yyline,yychar,yychar+1)); }
-  ">=" { return (new Yytoken(19,yytext(),yyline,yychar,yychar+2)); }
-  "&"  { return (new Yytoken(20,yytext(),yyline,yychar,yychar+1)); }
-  "|"  { return (new Yytoken(21,yytext(),yyline,yychar,yychar+1)); }
+  "," { return (new Yytoken(0,yytext(),yyline,yychar,yychar+1,"SEPARATOR")); }
+  ":" { return (new Yytoken(1,yytext(),yyline,yychar,yychar+1,"SEPARATOR")); }
+  ";" { return (new Yytoken(2,yytext(),yyline,yychar,yychar+1,"SEPARATOR")); }
+  "(" { return (new Yytoken(3,yytext(),yyline,yychar,yychar+1,"SEPARATOR")); }
+  ")" { return (new Yytoken(4,yytext(),yyline,yychar,yychar+1,"SEPARATOR")); }
+  "[" { return (new Yytoken(5,yytext(),yyline,yychar,yychar+1,"SEPARATOR")); }
+  "]" { return (new Yytoken(6,yytext(),yyline,yychar,yychar+1,"SEPARATOR")); }
+  "{" { return (new Yytoken(7,yytext(),yyline,yychar,yychar+1,"SEPARATOR")); }
+  "}" { return (new Yytoken(8,yytext(),yyline,yychar,yychar+1,"SEPARATOR")); }
+
+  "+" { return (new Yytoken(10,yytext(),yyline,yychar,yychar+1,"OPERATOR")); }
+  "-" { return (new Yytoken(11,yytext(),yyline,yychar,yychar+1,"OPERATOR")); }
+  "*" { return (new Yytoken(12,yytext(),yyline,yychar,yychar+1,"OPERATOR")); }
+  "/" { return (new Yytoken(13,yytext(),yyline,yychar,yychar+1,"OPERATOR")); }
+  "=" { return (new Yytoken(14,yytext(),yyline,yychar,yychar+1,"OPERATOR")); }
+  "<>" { return (new Yytoken(15,yytext(),yyline,yychar,yychar+2,"OPERATOR")); }
+  "<"  { return (new Yytoken(16,yytext(),yyline,yychar,yychar+1,"OPERATOR")); }
+  "<=" { return (new Yytoken(17,yytext(),yyline,yychar,yychar+2,"OPERATOR")); }
+  ">"  { return (new Yytoken(18,yytext(),yyline,yychar,yychar+1,"OPERATOR")); }
+  ">=" { return (new Yytoken(19,yytext(),yyline,yychar,yychar+2,"OPERATOR")); }
+  "&"  { return (new Yytoken(20,yytext(),yyline,yychar,yychar+1,"OPERATOR")); }
+  "|"  { return (new Yytoken(21,yytext(),yyline,yychar,yychar+1,"OPERATOR")); }
 
 
-  "function"  { return (new Yytoken(30,yytext(),yyline,yychar,yychar+8)); }
-  "if"  { return (new Yytoken(31,yytext(),yyline,yychar,yychar+2)); }
-  "else"  { return (new Yytoken(32,yytext(),yyline,yychar,yychar+4)); }
-  "var"  { return (new Yytoken(33,yytext(),yyline,yychar,yychar+3)); }
-  "loop"  { return (new Yytoken(34,yytext(),yyline,yychar,yychar+4)); }
-  "shout"  { return (new Yytoken(30,yytext(),yyline,yychar,yychar+5)); }
+  "function"  { return (new Yytoken(30,yytext(),yyline,yychar,yychar+8,"KEYWORD")); }
+  "if"  { return (new Yytoken(31,yytext(),yyline,yychar,yychar+2,"KEYWORD")); }
+  "else"  { return (new Yytoken(32,yytext(),yyline,yychar,yychar+4,"KEYWORD")); }
+  "var"  { return (new Yytoken(33,yytext(),yyline,yychar,yychar+3,"KEYWORD")); }
+  "loop"  { return (new Yytoken(34,yytext(),yyline,yychar,yychar+4,"KEYWORD")); }
+  "shout"  { return (new Yytoken(30,yytext(),yyline,yychar,yychar+5,"KEYWORD")); }
 
   {NONNEWLINE_WHITE_SPACE_CHAR}+ { }
 
@@ -65,18 +65,18 @@ Ident = {ALPHA}({ALPHA}|{DIGIT}|_)*
 
   \"{STRING_TEXT}\" {
     String str =  yytext().substring(1,yylength()-1);
-    return (new Yytoken(40,str,yyline,yychar,yychar+yylength()));
+    return (new Yytoken(40,str,yyline,yychar,yychar+yylength(),"LITERAL"));
   }
   
   \"{STRING_TEXT} {
     String str =  yytext().substring(1,yytext().length());
     Utility.error(Utility.E_UNCLOSEDSTR);
-    return (new Yytoken(41,str,yyline,yychar,yychar + str.length()));
+    //return (new Yytoken(41,str,yyline,yychar,yychar + str.length(),""));
   } 
   
-  {DIGIT}+ { return (new Yytoken(42,yytext(),yyline,yychar,yychar+yylength())); }  
+  {DIGIT}+ { return (new Yytoken(42,yytext(),yyline,yychar,yychar+yylength(),"LITERAL")); }
 
-  {Ident} { return (new Yytoken(43,yytext(),yyline,yychar,yychar+yylength())); }  
+  {Ident} { return (new Yytoken(43,yytext(),yyline,yychar,yychar+yylength(),"IDENTIFIER")); }
 }
 
 <COMMENT> {
