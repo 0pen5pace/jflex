@@ -4,9 +4,8 @@ A0 = {ε}
 A1 = {a,..,z|A,..,Z}
 A2 = {0,1,2,3,4,5,6,7,8,9}
 A3 = {(,),{,},[,],+,-,*,/,^}
-A4 = {function,if,else,for,var,loop}
+A4 = {function,if,else,var,loop,shout}
 A5 = {=,|,&}
-A6 = {#,;}
 
 
 Nicht Terminale:
