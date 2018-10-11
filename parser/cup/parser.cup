@@ -1,0 +1,53 @@
+import java_cup.runtime.*;
+
+/* Preliminaries to set up and use the scanner.  */
+init with {: scanner.init();              :};
+scan with {: return scanner.next_token(); :};
+
+/* Terminals (tokens returned by the scanner). */
+terminal            COMMA, LPAR, RPAR, SEMICOLON, BEGIN, END;
+terminal            EQUAL, UNEQUAL, ASSIGN, MINUS, PLUS, TIMES, DIV;
+terminal            FUNCTION, IF, ELSE, VAR, LOOP, SHOUT;
+terminal Integer    NUMBER;
+terminal String     STRING;
+terminal String     ID;
+
+/* Non terminals */
+
+non terminal            STMT;
+non terminal            EXP;
+non terminal            FUNC;
+non terminal            ASG;
+non terminal            CON;
+
+/* Precedences */
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+
+
+/* The grammar */
+
+STMT     ::=    STMT STMT | STMT EXP | STMT FUNC | STMT ASG | EXP | FUNC | ASG;
+EXP      ::=    EXP PLUS EXP |
+                EXP MINUS EXP  |
+                EXP TIMES EXP  |
+                EXP DIVIDE EXP  |
+                LPAREN EXP RPAREN |
+                NUMBER;
+
+CON      ::=    EXP EQUAL EXP |
+                STRING EQUAL STRING |
+                EXP EQUAL EXP |
+                STRING UNEQUAL STRING |
+                ;
+ASG      ::=    ID ASSIGN NUMER |ID ASSIGN STRING | ID ASSIGN ID |ID ASSIGN EXP;
+FUNC     ::=    FUNCTION LPAR RPAR BEGIN STMT END |
+                FUNCTION LPAR EXP RPAR BEGIN STMT END;
+
+/*
+Going forward this could help
+http://www2.cs.tum.edu/projekte/cup/examples.php#manual
+*/
+
+
+

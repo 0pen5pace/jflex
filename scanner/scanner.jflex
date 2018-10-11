@@ -1,5 +1,4 @@
-/* this is the scanner example from the JLex website 
-   (with small modifications to make it more readable) */
+/* Most of this is based on the examples in the jflex git repository */
 
 %%
 
