@@ -1,0 +1,41 @@
+import java_cup.runtime.*;
+
+/* Preliminaries to set up and use the scanner.  */
+init with {: scanner.init();              :};
+scan with {: return scanner.next_token(); :};
+
+/* Terminals (tokens returned by the scanner). */
+terminal            SEMICOLON, PLUS, MINUS, TIMES, DIVIDE, MOD;
+terminal            EQUAL, UNEQUAL, COMMA
+terminal            LPAR, RPAR;
+terminal Integer    NUMBER;
+terminal String     STRING;
+terminal String     ID;
+
+/* Non terminals */
+
+non terminal            STMT;
+non terminal            VAR;
+non terminal            EXP;
+non terminal            FUNCTION;
+
+/* Precedences */
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+
+
+/* The grammar */
+
+STMT     ::=    STMT STMT | STMT EXP | STMT VAR | STMT FUNCTION;
+EXP      ::=    EXP PLUS EXP |
+                EXP MINUS EXP  |
+                EXP TIMES EXP  |
+                EXP DIVIDE EXP  |
+                LPAREN EXP RPAREN |
+                NUMBER;
+VAR         ::= VAR
+FUNCTION
+
+
+
+

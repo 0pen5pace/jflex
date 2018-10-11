@@ -1,0 +1,15 @@
+var xyz = "test"
+/*
+* Realy long comment
+* */
+
+function tester() {
+    if(3 == 3) {
+        shout("Wow... Who ever thought!")
+    }
+    loop(i<100,i++,i=0) shout("It's the "+i+" time...")
+}
+
+// other comment
+
+tester()
