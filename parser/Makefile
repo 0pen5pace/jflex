@@ -12,10 +12,12 @@ compile: gen_jflex output/*.java
 	javac -cp .:output -d output output/*.java
 	javac -cp .:output -d output cup/*.java
 
-gen_jflex: scanner.jflex outdir
+gen_jflex: gen_cup scanner.jflex outdir
 	$(JFLEX) -d output scanner.jflex
 
-
+gen_cup:
+    java -jar ./cup/java-cup-11b.jar -interface cup/parser.cup
+    mv parser.java sym.java out/genfiles
 
 
 output: compile test.code outdir

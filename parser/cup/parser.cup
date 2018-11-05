@@ -22,17 +22,17 @@ non terminal            CON;
 
 /* Precedences */
 precedence left PLUS, MINUS;
-precedence left TIMES, DIVIDE;
+precedence left TIMES, DIV;
 
 
 /* The grammar */
 
-STMT     ::=    STMT STMT | STMT EXP | STMT FUNC | STMT ASG | EXP | FUNC | ASG;
+STMT     ::=    STMT EXP | STMT FUNC | STMT ASG | EXP | FUNC | ASG;
 EXP      ::=    EXP PLUS EXP |
                 EXP MINUS EXP  |
                 EXP TIMES EXP  |
-                EXP DIVIDE EXP  |
-                LPAREN EXP RPAREN |
+                EXP DIV EXP  |
+                LPAR EXP RPAR |
                 NUMBER;
 
 CON      ::=    EXP EQUAL EXP |
@@ -40,7 +40,7 @@ CON      ::=    EXP EQUAL EXP |
                 EXP EQUAL EXP |
                 STRING UNEQUAL STRING |
                 ;
-ASG      ::=    ID ASSIGN NUMER |ID ASSIGN STRING | ID ASSIGN ID |ID ASSIGN EXP;
+ASG      ::=    ID ASSIGN NUMBER |ID ASSIGN STRING | ID ASSIGN ID | ID ASSIGN EXP | ID;
 FUNC     ::=    FUNCTION LPAR RPAR BEGIN STMT END |
                 FUNCTION LPAR EXP RPAR BEGIN STMT END;
 
